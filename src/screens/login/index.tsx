@@ -3,8 +3,7 @@ import React, { FormEvent } from 'react';
 const apiUrl = process.env.REACT_APP_API_URL;
 export const LoginScreen=()=>{
 
-  
-    const {login,user}=useAuth()
+  const {login,user}=useAuth()
   // 提交
   const handleSubmit=(event:FormEvent<HTMLFormElement>)=>{
     event.preventDefault()//阻止默认提交
@@ -18,7 +17,7 @@ export const LoginScreen=()=>{
     <form onSubmit={handleSubmit}>
       {
         user?<div>
-            登录成功，用户名:{user?.name}
+          登录成功，用户名：{user?.name}
         </div>:null
       }
         <div>
@@ -27,9 +26,9 @@ export const LoginScreen=()=>{
         </div>  
         <div>
           <label htmlFor={'password'}>密码</label>
-          <input type="text" id={'password'} />
+          <input type="password" id={'password'} />
         </div>  
-        <button type={'submit'}>注册</button>
+        <button type={'submit'}>登录</button>
     </form>
 
     
