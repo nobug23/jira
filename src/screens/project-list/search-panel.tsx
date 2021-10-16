@@ -1,11 +1,12 @@
 // import { useEffect, useState } from "react"
 
 export interface User {
-    id:string,
-    name:string,
-    email:string,
-    title:string,
-    organization:string
+    id:string;
+    name:string;
+    email:string;
+    title:string;
+    organization:string;
+    token:string;
 }
 
 interface SearchPanelProps{//定义变量，说明使用类型
