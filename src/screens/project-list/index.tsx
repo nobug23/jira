@@ -3,6 +3,7 @@ import { SearchPanel } from "./search-panel";
 import { List } from "./list";
 import { cleanObject,useDebounce ,useMount} from "Utils";
 import * as qs from 'qs'
+import { useHttp } from "Utils/http";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 export const ProjectListScreen = () => {
@@ -13,23 +14,13 @@ export const ProjectListScreen = () => {
   const debouncedParam=useDebounce(param,200)
   const [users, setUsers] = useState([]);
   const [list, setList] = useState([]);
+  const client=useHttp()
   useEffect(() => {
-    // 请求数据
-    fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(debouncedParam))}`).then(async (response) => {
-      if (response.ok) {
-        setList(await response.json());
-      }
-    });
-    
+    client('projects',{data:cleanObject(debouncedParam)}).then(setList)
   }, [debouncedParam]);
 
   useMount(() => {
-    // 请求数据--存储用户名
-    fetch(`${apiUrl}/users`).then(async (response) => {
-      if (response.ok) {
-        setUsers(await response.json());
-      }
-    });
+   client('users').then(setUsers)
   });
   return (
     <div>
